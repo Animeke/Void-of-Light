@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 4288090678278058027}
   - component: {fileID: 5357901803729270589}
   m_Layer: 0
-  m_Name: P_Hand
+  m_Name: CorpseArm
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -128,6 +128,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Player: {fileID: 0}
   CorpseArm: {fileID: 0}
+  Explosion: {fileID: 0}
   Speed: 0
 --- !u!1 &7435846898437423248
 GameObject:

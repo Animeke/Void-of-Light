@@ -5,35 +5,56 @@ using UnityEngine;
 public class Corpse : MonoBehaviour
 
 {
-public GameObject Player;
+public GameObject PlayerCharacter;
 public GameObject CorpseArm;
-public float Speed;
+public ParticleSystem Explosion;
+public float Speed = 1.5f;
 Vector3 StartPosition;
 Vector3 Target = new Vector3(0, 0, 0);
+bool Crawling = false;
+Player PlayerController;
+
+public AudioSource Burst;
 
     void Start()
     {
         StartPosition = transform.position;
+        PlayerController = PlayerCharacter.GetComponent<Player>();
     }
 
     // Update is called once per frame
     void Update()
     {
+        if (Crawling == true)
+        {
         transform.position = Vector3.MoveTowards(transform.position, Target, Speed * Time.deltaTime);
+        }
     }
 
-    public void Start()
+    public void Crawl()
     {
-        Speed = 1.5f;
-    }
-
-    public void Slow()
-    {
-        Speed = Speed/2;
+        Crawling = true;
     }
 
     public void Retreat()
     {
-        Speed = -Speed;
+        Crawling = false;
+        Instantiate(Explosion, transform.position, transform.rotation).Play();
+        Burst.Play();
+        transform.position = StartPosition;
+    }
+
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.tag == "Trigger") 
+        {
+            Retreat();              
+        }
+
+        if (other.tag == "Player Character") 
+        {
+            PlayerController.Lose();       
+        }
+        
     }
 }
