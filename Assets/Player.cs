@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Player : MonoBehaviour
 
@@ -9,34 +10,61 @@ public class Player : MonoBehaviour
     public GameObject Chosen;
     Corpse CorpseController;
 
+    public AudioSource LoseSFX;
+    public AudioSource WinSFX;
+    public AudioSource BGSFX;
+    public AudioSource MainMenuSFX;
+
     int Selection = 0;
     float WaitTime = .5f;
     float TimeLeft = 10;
 
     bool Finished = false;
+    public bool Playing = false;
+    bool Grabbed = false;
 
     public GameObject LoseScreen;
     public GameObject WinScreen;
+    public GameObject TimerMesh;
 
     // Start is called before the first frame update
-    void Start()
+    public void StartGame()
     {
         StartCoroutine(Choose());
+        BGSFX.Play();
     }
 
     // Update is called once per frame
     void Update()
     {
+        if (Input.GetKey(KeyCode.R))
+        {
+            SceneManager.LoadScene("VoidofLight");
+        }
+
+        if (Finished == true)
+        {
+            for(int i = 0; i < CorpseArms.Length; i++)
+            {
+            Destroy(CorpseArms[i].gameObject);
+            }
+        }
+
         if (Finished == false)
         {
-            if (TimeLeft >= 0)
+            if (TimeLeft >= 0 && Playing == true)
             {
                 TimeLeft = TimeLeft - Time.deltaTime;
                 print(TimeLeft);
-            } else {
+            }
+
+            if (TimeLeft <= 0 && Playing == true)
+            {
                 Win();
             }
 
+            if (Playing == true)
+            {
             if (Input.GetKey(KeyCode.W) && Input.GetKey(KeyCode.A))
             {
                 transform.rotation = Quaternion.Euler(new Vector3(0,0,225));
@@ -84,6 +112,7 @@ public class Player : MonoBehaviour
                 transform.rotation = Quaternion.Euler(new Vector3(0,0,270));
                 print("Left");
             }
+            }
         }
     }
 
@@ -130,24 +159,34 @@ public class Player : MonoBehaviour
 
         if (TimeLeft <= 5 && TimeLeft > 3)
         {
-            CorpseController.Speed = Random.Range(4f,5f);
+            CorpseController.Speed = Random.Range(3.5f,4.25f);
         }
 
         if (TimeLeft < 3)
         {
-            CorpseController.Speed = Random.Range(6f,7f);
+            CorpseController.Speed = Random.Range(5f,6f);
         }
     }
 
     public void Lose()
     {
+        if (Grabbed == false)
+        {
+        TimerMesh.SetActive(false);
         Finished = true;
         LoseScreen.SetActive(true);
+        BGSFX.Stop();
+        LoseSFX.Play();
+        Grabbed = true;
+        }
     }
 
     void Win()
     {
+        TimerMesh.SetActive(false);
         Finished = true;
         WinScreen.SetActive(true);
+        BGSFX.Stop();
+        WinSFX.Play();
     }
 }

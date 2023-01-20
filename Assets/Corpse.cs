@@ -38,10 +38,13 @@ public AudioSource Burst;
 
     public void Retreat()
     {
+        if(Crawling == true)
+        {
         Crawling = false;
         Instantiate(Explosion, transform.position, transform.rotation).Play();
         Burst.Play();
         transform.position = StartPosition;
+        }
     }
 
     private void OnTriggerEnter2D(Collider2D other)
