@@ -184,9 +184,12 @@ MonoBehaviour:
   m_text: '
 
 
+
     Use WASD to survive
 
-    Press R to reset'
+    Press R to reset
+
+    Press ESC to exit'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -2150,7 +2153,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: 87caf3aca0e05204e8d0617eb5813c13, type: 3}
   m_PlayOnAwake: 0
-  m_Volume: 1
+  m_Volume: 0.5
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -3747,7 +3750,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: b6261a21881c549499b1ba389bccb448, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 7e35d6af79a060b4088e142c4a50d937, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1

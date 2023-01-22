@@ -42,20 +42,25 @@ public class Player : MonoBehaviour
             SceneManager.LoadScene("VoidofLight");
         }
 
-        if (Finished == true)
+    if (Input.GetKey(KeyCode.Escape))
+        {
+            Application.Quit();
+        }
+        
+        /*if (Finished == true)
         {
             for(int i = 0; i < CorpseArms.Length; i++)
             {
             Destroy(CorpseArms[i].gameObject);
             }
-        }
+        }*/
 
         if (Finished == false)
         {
             if (TimeLeft >= 0 && Playing == true)
             {
                 TimeLeft = TimeLeft - Time.deltaTime;
-                print(TimeLeft);
+                //print(TimeLeft);
             }
 
             if (TimeLeft <= 0 && Playing == true)
@@ -68,49 +73,49 @@ public class Player : MonoBehaviour
             if (Input.GetKey(KeyCode.W) && Input.GetKey(KeyCode.A))
             {
                 transform.rotation = Quaternion.Euler(new Vector3(0,0,225));
-                print("Top Left");
+                //print("Top Left");
             }
 
             if (Input.GetKey(KeyCode.W) && !Input.GetKey(KeyCode.A) && !Input.GetKey(KeyCode.D))
             {
                 transform.rotation = Quaternion.Euler(new Vector3(0,0,180));
-                print("Top");
+                //print("Top");
             }
 
             if (Input.GetKey(KeyCode.W) && Input.GetKey(KeyCode.D))
             {
                 transform.rotation = Quaternion.Euler(new Vector3(0,0,135));
-                print("Top Right");
+                //print("Top Right");
             }
 
             if (Input.GetKey(KeyCode.D) && !Input.GetKey(KeyCode.W) && !Input.GetKey(KeyCode.S))
             {
                 transform.rotation = Quaternion.Euler(new Vector3(0,0,90));
-                print("Right");
+                //print("Right");
             }
 
             if (Input.GetKey(KeyCode.S) && Input.GetKey(KeyCode.D))
             {
                 transform.rotation = Quaternion.Euler(new Vector3(0,0,45));
-                print("Bottom Right");
+                //print("Bottom Right");
             }
 
             if (Input.GetKey(KeyCode.S) && !Input.GetKey(KeyCode.A) && !Input.GetKey(KeyCode.D))
             {
                 transform.rotation = Quaternion.Euler(new Vector3(0,0,0));
-                print("Bottom");
+                //print("Bottom");
             }
 
             if (Input.GetKey(KeyCode.S) && Input.GetKey(KeyCode.A))
             {
                 transform.rotation = Quaternion.Euler(new Vector3(0,0,315));
-                print("Bottom Left");
+                //print("Bottom Left");
             }
 
             if (Input.GetKey(KeyCode.A) && !Input.GetKey(KeyCode.W) && !Input.GetKey(KeyCode.S))
             {
                 transform.rotation = Quaternion.Euler(new Vector3(0,0,270));
-                print("Left");
+                //print("Left");
             }
             }
         }
@@ -121,7 +126,7 @@ public class Player : MonoBehaviour
         AdjustTime();
         yield return new WaitForSeconds(WaitTime);
         Selection = Random.Range(0,8);
-        print(Selection);
+        //print(Selection);
         CorpseController = CorpseArms[Selection].GetComponent<Corpse>();
         //CorpseArms[Selection] = Chosen;
         AdjustSpeed();
@@ -134,19 +139,19 @@ public class Player : MonoBehaviour
         if (TimeLeft <= 8 && TimeLeft > 5)
         {
             WaitTime = .35f;
-            print("WaitTime .35");
+            //print("WaitTime .35");
         }
 
         if (TimeLeft <= 5 && TimeLeft > 3)
         {
             WaitTime = .25f;
-            print("WaitTime .25");
+            //print("WaitTime .25");
         }
 
         if (TimeLeft < 3)
         {
             WaitTime = .15f;
-            print("WaitTime .15");
+            //print("WaitTime .15");
         }
     }
 
